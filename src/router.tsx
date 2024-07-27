@@ -10,7 +10,6 @@ export const Router = () => {
             <Routes>
                 <Route element={<AppLayout />}>
                     <Route path="/" element={<DashBoardView />} index />
-
                 </Route>
             </Routes>
         </BrowserRouter>
