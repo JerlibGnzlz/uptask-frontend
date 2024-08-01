@@ -28,7 +28,10 @@ export default function AppLayout() {
                 <p className="text-center">Todos los derechos reservados {new Date().getFullYear()}</p>
             </footer>
 
-            <ToastContainer />
+            <ToastContainer
+                pauseOnFocusLoss={false}
+                pauseOnHover={false}
+            />
         </>
     )
 }
