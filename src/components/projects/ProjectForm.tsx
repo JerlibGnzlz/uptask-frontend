@@ -8,9 +8,9 @@ type ProjectFormProps = {
     errors: FieldErrors<ProjectFormData>
 }
 
-export default function ProjectForm({ register, errors }): ProjectFormProps {
+// export default function ProjectForm({ register, errors }): React.FC<ProjectFormProps> {
 
-
+export const ProjectForm: React.FC<ProjectFormProps> = ({ register, errors }) => {
     return (
         <>
             <div className="mb-5 space-y-3">
