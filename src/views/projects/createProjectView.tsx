@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from 'react-hook-form'
 import { ProjectForm } from "@/components/projects/ProjectForm";
+import { useMutation } from "@tanstack/react-query"
 import { ProjectFormData } from "@/types/index";
 import { createProject } from "@/api/ProjectAPI";
 import { toast } from "react-toastify";
@@ -21,10 +22,21 @@ export default function CreateProjectView() {
 
     const { register, handleSubmit, formState: { errors } } = useForm({ defaultValues: initialValues })
 
+
+    const mutation = useMutation({
+        mutationFn: createProject,
+        onError: () => {
+
+        },
+        onSuccess: (data) => {
+            toast.success(data)
+            navigate("/")
+        }
+    })
+
+
     const handleForm = async (formData: ProjectFormData) => {
-        const data = await createProject(formData)
-        toast.success(data)
-        navigate("/")
+        await mutation.mutateAsync(formData)
     }
 
 
