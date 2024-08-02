@@ -1,6 +1,20 @@
+import { getProject } from "@/api/ProjectAPI"
+import { useQuery } from "@tanstack/react-query"
 import { Link } from "react-router-dom"
 
 export default function DashBoardView() {
+
+    const { data, isLoading } = useQuery({
+        queryKey: ["projets"],
+        queryFn: getProject
+    })
+
+    if (isLoading) {
+        return "Cargando"
+    }
+
+    console.log(data)
+
     return (
         <>
             <h1 className="text-5xl font-black">Mis Proyectos</h1>
@@ -10,8 +24,11 @@ export default function DashBoardView() {
                 <Link to={"/projects/create"}
                     className="bg-purple-400 hover:bg-purple-500 text-white font-bold p-3 text-xl cursor-pointer transition-colors "
                 >
-                    Nuevo proyecto</Link>
+                    Nuevo proyecto
+                </Link>
+
             </nav>
+
         </>
     )
 }

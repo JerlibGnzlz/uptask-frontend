@@ -13,3 +13,16 @@ export const createProject = async (formData: ProjectFormData) => {
         }
     }
 }
+
+export const getProject = async () => {
+    try {
+        const { data } = await api.get("/projects")
+        console.log(data)
+        return data
+
+    } catch (error) {
+        if (isAxiosError(error) && error.response) {
+            throw new Error(error.response.data.error)
+        }
+    }
+}
