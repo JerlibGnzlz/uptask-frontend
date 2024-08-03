@@ -9,11 +9,12 @@ export default function EditProjectView() {
     const params = useParams()
     const projectId = params.projectId!
 
-    const { data, isLoading } = useQuery({
+    const { data, isLoading, error, isError } = useQuery({
         queryKey: ["editProject", projectId],
-        queryFn: () => getProjectById(projectId)
+        queryFn: () => getProjectById(projectId),
+        retry: false
     })
-
+    console.log(data)
 
 
     return (
