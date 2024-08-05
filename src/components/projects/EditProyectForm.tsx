@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { ProjectForm } from "./ProjectForm";
-import { ProjectFormData } from "@/types/index";
+import { Project, ProjectFormData } from "@/types/index";
 import { useForm } from "react-hook-form";
 import { useMutation } from '@tanstack/react-query'
 import { updateProject } from "@/api/ProjectAPI";
