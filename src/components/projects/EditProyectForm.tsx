@@ -11,7 +11,6 @@ type EditProyectFormProps = {
 
 export default function EditProyectForm({ data }: EditProyectFormProps) {
 
-    console.log(data)
 
 
     const initialValues: ProjectFormData = {
@@ -22,8 +21,8 @@ export default function EditProyectForm({ data }: EditProyectFormProps) {
 
     const { register, handleSubmit, formState: { errors } } = useForm({ defaultValues: initialValues })
 
-    const handleForm = () => {
-
+    const handleForm = (formData: ProjectFormData) => {
+        console.log(formData)
     }
 
 
