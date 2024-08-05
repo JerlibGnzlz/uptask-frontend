@@ -20,7 +20,7 @@ export default function CreateProjectView() {
     const navigate = useNavigate()
 
     /* -------------------------------------------------------------------------- */
-    //*USEMUTATION 
+    /* ------------------------------- USEMUTATION ------------------------------ */
     /* -------------------------------------------------------------------------- */
 
     const { register, handleSubmit, formState: { errors } } = useForm({ defaultValues: initialValues })
@@ -40,6 +40,7 @@ export default function CreateProjectView() {
 
     const handleForm = (formData: ProjectFormData) => mutate(formData)
 
+    /* -------------------------------------------------------------------------- */
     /* -------------------------------------------------------------------------- */
 
     return (
