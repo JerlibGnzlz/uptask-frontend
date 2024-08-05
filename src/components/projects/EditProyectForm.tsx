@@ -3,13 +3,21 @@ import { ProjectForm } from "./ProjectForm";
 import { ProjectFormData } from "@/types/index";
 import { useForm } from "react-hook-form";
 
-export default function EditProyectForm() {
+
+type EditProyectFormProps = {
+    data: ProjectFormData
+}
+
+
+export default function EditProyectForm({ data }: EditProyectFormProps) {
+
+    console.log(data)
 
 
     const initialValues: ProjectFormData = {
-        projectName: "",
-        clientName: "",
-        description: ""
+        projectName: data.projectName,
+        clientName: data.clientName,
+        description: data.description
     }
 
     const { register, handleSubmit, formState: { errors } } = useForm({ defaultValues: initialValues })
@@ -17,7 +25,6 @@ export default function EditProyectForm() {
     const handleForm = () => {
 
     }
-
 
 
     return (
