@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom"
+import { Link, Outlet } from "react-router-dom"
 import Logo from "@/components/Logo"
 import { ToastContainer } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
@@ -11,7 +11,9 @@ export default function AppLayout() {
 
                 <div className="max-w-screen-2xl mx-auto flex flex-col lg:flex-row justify-between items-center">
                     <div className="w-64">
-                        <Logo />
+                        <Link to={"/"}>
+                            <Logo />
+                        </Link>
                     </div>
 
                     <NavMenu />
