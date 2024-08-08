@@ -29,7 +29,7 @@ export default function AddTaskModal() {
 
     }
 
-    const { register, handleSubmit, formState: { errors } } = useForm({ defaultValues: initialValues })
+    const { register, handleSubmit, reset, formState: { errors } } = useForm({ defaultValues: initialValues })
 
 
     const { mutate } = useMutation({
@@ -39,6 +39,8 @@ export default function AddTaskModal() {
         },
         onSuccess: (data) => {
             toast.success(data)
+            reset()
+            navigate(location.pathname, { replace: true })
         }
     })
 
