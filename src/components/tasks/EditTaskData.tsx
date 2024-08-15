@@ -18,7 +18,6 @@ export default function EditTaskData() {
         }),
         enabled: !!taskId
     })
-    console.log(data)
 
-    if (data) return <EditTaskModal />
+    if (data) return <EditTaskModal data={data} />
 }
