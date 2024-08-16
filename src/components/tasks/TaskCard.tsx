@@ -1,10 +1,9 @@
 import { delteTaskById } from "@/api/TaskAPI"
-import { Task, TaskFormData } from "@/types/index"
+import { Task } from "@/types/index"
 import { Menu, MenuButton, MenuItem, MenuItems, Transition } from "@headlessui/react"
 import { EllipsisVerticalIcon } from "@heroicons/react/20/solid"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { Fragment } from "react"
-import { useForm } from "react-hook-form"
 import { useNavigate, useParams } from "react-router-dom"
 import { toast } from "react-toastify"
 
@@ -22,12 +21,7 @@ export default function TaskCard({ task }: TaskCardProps) {
     const navigate = useNavigate()
 
 
-    const initialValues: TaskFormData = {
-        name: "",
-        description: ""
-    }
 
-    const { reset } = useForm({ defaultValues: initialValues })
 
 
     const queryClient = useQueryClient()
@@ -38,10 +32,8 @@ export default function TaskCard({ task }: TaskCardProps) {
             toast.error(error.message)
         },
         onSuccess: (data) => {
-            queryClient.invalidateQueries({ queryKey: ["deleteProject", projectId] })
             toast.success(data)
-            reset()
-            navigate(location.pathname, { replace: true })
+            queryClient.invalidateQueries({ queryKey: ["editProject", projectId] })
         }
     })
 
