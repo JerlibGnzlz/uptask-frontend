@@ -21,13 +21,12 @@ export const createTask = async ({ formData, projectId }: Pick<TaskAPI, "formDat
     }
 }
 
-export const getTaskById = async ({ projectId, taskId }: Pick<TaskAPI, "taskId" | "projectId">) => {
+export const getTaskById = async ({ projectId, taskId }: Pick<TaskAPI, "projectId" | "taskId">) => {
 
     try {
-        const url = `projects/${projectId}/tasks/${taskId}`
-        const { data } = await api(url)
+        const url = `/projects/${projectId}/tasks/${taskId}`
+        const { data } = await api.get(url)
         return data
-        console.log(data)
 
     } catch (error) {
         if (isAxiosError(error) && error.response) {
@@ -35,3 +34,17 @@ export const getTaskById = async ({ projectId, taskId }: Pick<TaskAPI, "taskId" 
         }
     }
 }
+
+
+export const updateTask = async ({ projectId, taskId, formData }: Pick<TaskAPI, "projectId" | "taskId" | "formData">) => {
+    try {
+        const url = `/projects/${projectId}/tasks/${taskId}`;
+        const { data } = await api.put(url, formData);
+        console.log("Task Data:", data);
+        return data;
+    } catch (error) {
+        if (isAxiosError(error) && error.response) {
+            throw new Error(error.response.data.error);
+        }
+    }
+};
