@@ -1,18 +1,40 @@
 import { Fragment } from 'react';
 import { Dialog, DialogPanel, DialogTitle, Transition, TransitionChild } from '@headlessui/react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { getTaskById } from '@/api/TaskAPI';
+import { toast } from 'react-toastify';
 
 
 export default function TaskModalDetails() {
 
 
+    const params = useParams()
+    const projectId = params.projectId!
+
     const navigate = useNavigate()
     const location = useLocation()
     const queryParams = new URLSearchParams(location.search)
-    const taskId = queryParams.get("viewTask")
-    console.log(taskId)
+    const taskId = queryParams.get("viewTask")!
 
     const show = taskId ? true : false
+    const { data, isError, error } = useQuery({
+        queryKey: ["task", taskId],
+        queryFn: () => getTaskById({
+            projectId,
+            taskId
+        }),
+        enabled: !!taskId,
+        retry: false
+    })
+
+
+    if (isError) {
+        toast.error(error.message)
+        return <Navigate to={`/projects/${projectId}`} />
+    }
+
+
     return (
         <>
             <Transition appear show={show} as={Fragment}>
@@ -46,11 +68,12 @@ export default function TaskModalDetails() {
                                     <DialogTitle
                                         as="h3"
                                         className="font-black text-4xl text-slate-600 my-5"
-                                    >Titulo aquí
+                                    >
+
                                     </DialogTitle>
-                                    <p className='text-lg text-slate-500 mb-2'>Descripción:</p>
+                                    <p className='text-lg text-slate-500 mb-2'>Descripción: </p>
                                     <div className='my-5 space-y-3'>
-                                        <label className='font-bold'>Estado Actual:</label>
+                                        <label className='font-bold'>Estado Actual: </label>
                                     </div>
                                 </DialogPanel>
                             </TransitionChild>
