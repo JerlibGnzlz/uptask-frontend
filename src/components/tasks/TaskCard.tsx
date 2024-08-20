@@ -79,7 +79,7 @@ export default function TaskCard({ task }: TaskCardProps) {
                             </MenuItem>
 
                             <MenuItem>
-                                <button type='button' className='block px-3 py-1 text-sm leading-6 text-red-500'
+                                <button type='button' className="block px-3 py-1 text-sm leading-6 text-red-500"
                                     onClick={() => mutate({ projectId, taskId: task._id })}
                                 >
 
