@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import { formatDate } from '@/utils/utils';
 import { statusTraslations } from '@/locales/es';
 import React from 'react';
+import { TaskStatus } from '@/types/index';
 
 
 export default function TaskModalDetails() {
@@ -31,7 +32,7 @@ export default function TaskModalDetails() {
         retry: false
     })
 
-    // const queryClient = useQueryClient()
+    const queryClient = useQueryClient()
 
     const { mutate } = useMutation({
         mutationFn: updateStatus,
@@ -40,14 +41,23 @@ export default function TaskModalDetails() {
         },
         onSuccess: (data) => {
             toast.success(data)
-            // queryClient.invalidateQueries({
-            //     queryKey: ["editProject", projectId]
-            // })
+            queryClient.invalidateQueries({
+                queryKey: ["editProject", projectId]
+            }),
+                queryClient.invalidateQueries({
+                    queryKey: ["task", taskId],
+                })
         }
     })
 
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        console.log(e.target.value)
+        const status = e.target.value as TaskStatus
+        const data = {
+            projectId,
+            taskId,
+            status
+        }
+        mutate(data)
     }
 
 
