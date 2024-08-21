@@ -1,11 +1,12 @@
 import { Fragment } from 'react';
 import { Dialog, DialogPanel, DialogTitle, Transition, TransitionChild } from '@headlessui/react';
 import { Navigate, useLocation, useNavigate, useParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { getTaskById } from '@/api/TaskAPI';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { getTaskById, updateStatus } from '@/api/TaskAPI';
 import { toast } from 'react-toastify';
 import { formatDate } from '@/utils/utils';
 import { statusTraslations } from '@/locales/es';
+import React from 'react';
 
 
 export default function TaskModalDetails() {
@@ -29,6 +30,26 @@ export default function TaskModalDetails() {
         enabled: !!taskId,
         retry: false
     })
+
+    // const queryClient = useQueryClient()
+
+    const { mutate } = useMutation({
+        mutationFn: updateStatus,
+        onError: (error) => {
+            toast.error(error.message)
+        },
+        onSuccess: (data) => {
+            toast.success(data)
+            // queryClient.invalidateQueries({
+            //     queryKey: ["editProject", projectId]
+            // })
+        }
+    })
+
+    const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        console.log(e.target.value)
+    }
+
 
     if (isError) {
         toast.error(error.message, { toastId: "error" })
@@ -78,6 +99,7 @@ export default function TaskModalDetails() {
                                         <select
                                             className='w-full p-3 bg-white border border-gray-300'
                                             defaultValue={data.status}
+                                            onChange={handleChange}
                                         >
                                             {Object.entries(statusTraslations).map(([key, value]) => (
                                                 <option key={key} value={key}>
