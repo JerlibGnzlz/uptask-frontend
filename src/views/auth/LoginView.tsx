@@ -72,8 +72,6 @@ export default function LoginView() {
                 <Link
                     className="text-center text-gray-300 font-normal"
                     to={"/auth/register"}
-
-
                 >No tienes Cuenta? Crear una</Link>
             </nav>
         </>
