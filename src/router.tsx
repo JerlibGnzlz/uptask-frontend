@@ -7,6 +7,7 @@ import DetailProjectView from "./views/projects/detailProject";
 import AuthLayout from "./layouts/AuthLayout";
 import LoginView from "./views/auth/LoginView";
 import RegisterView from "./views/auth/RegisterView";
+import ConfirmAccountView from "./views/auth/ConfirmAccountView";
 
 
 export const Router = () => {
@@ -24,6 +25,7 @@ export const Router = () => {
                 <Route element={<AuthLayout />}>
                     <Route path="/auth/login" element={<LoginView />} />
                     <Route path="/auth/register" element={<RegisterView />} />
+                    <Route path="/auth/confirmar" element={<ConfirmAccountView />} />
                 </Route>
             </Routes>
         </BrowserRouter >
