@@ -30,7 +30,7 @@ export default function ConfirmAccountView() {
 
 
   const handleComplete = (token: confirmToken["token"]) => {
-    console.log(token)
+    mutate({ token })
 
   }
 
