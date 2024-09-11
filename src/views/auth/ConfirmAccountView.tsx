@@ -2,6 +2,10 @@ import { Link } from "react-router-dom";
 import { PinInput, PinInputField } from "@chakra-ui/pin-input"
 import { useState } from "react";
 import { confirmToken } from "@/types/index";
+import { useMutation } from "@tanstack/react-query";
+import { confirmarToken } from "@/api/AuthAPI";
+import { toast } from "react-toastify";
+
 
 
 
@@ -9,6 +13,16 @@ import { confirmToken } from "@/types/index";
 export default function ConfirmAccountView() {
 
   const [token, setToken] = useState<confirmToken["token"]>("")
+
+  const { mutate } = useMutation({
+    mutationFn: confirmarToken,
+    onError: (error) => {
+      toast.error(error.message)
+    },
+    onSuccess: (data) => {
+      toast.success(data)
+    }
+  })
 
   const handleChange = (token: confirmToken["token"]) => {
     setToken(token)
