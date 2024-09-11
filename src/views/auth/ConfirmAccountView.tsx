@@ -1,7 +1,24 @@
 import { Link } from "react-router-dom";
 import { PinInput, PinInputField } from "@chakra-ui/pin-input"
+import { useState } from "react";
+import { confirmToken } from "@/types/index";
+
+
+
+
 export default function ConfirmAccountView() {
 
+  const [token, setToken] = useState<confirmToken["token"]>("")
+
+  const handleChange = (token: confirmToken["token"]) => {
+    setToken(token)
+  }
+
+
+  const handleComplete = (token: confirmToken["token"]) => {
+    console.log(token)
+
+  }
 
   return (
     <>
@@ -19,7 +36,8 @@ export default function ConfirmAccountView() {
 
 
         <div className="flex justify-center gap-5">
-          <PinInput>
+
+          <PinInput value={token} onChange={handleChange} onComplete={handleComplete}>
             <PinInputField className="w-10 h-10 p-3 rounded-lg border-gray-300 border placeholder-white" />
             <PinInputField className="w-10 h-10 p-3 rounded-lg border-gray-300 border placeholder-white" />
             <PinInputField className="w-10 h-10 p-3 rounded-lg border-gray-300 border placeholder-white" />
