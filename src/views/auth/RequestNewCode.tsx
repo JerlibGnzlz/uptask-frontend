@@ -4,6 +4,7 @@ import { RequestConfirmationCodeForm } from "../../types";
 import ErrorMessage from "@/components/ErrorMessage";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import { requestNewCode } from "@/api/AuthAPI";
 
 
 
@@ -15,6 +16,7 @@ export default function RegisterView() {
     const { register, handleSubmit, reset, formState: { errors } } = useForm({ defaultValues: initialValues });
 
     const { mutate } = useMutation({
+        mutationFn: requestNewCode,
         onError: (error) => {
             toast.error(error.message)
         },
@@ -23,7 +25,9 @@ export default function RegisterView() {
         }
     })
 
-    const handleRequestCode = (formData: RequestConfirmationCodeForm) => { }
+    const handleRequestCode = (formData: RequestConfirmationCodeForm) => {
+        mutate(formData)
+    }
 
     return (
         <>
