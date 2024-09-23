@@ -9,6 +9,8 @@ import LoginView from "./views/auth/LoginView";
 import RegisterView from "./views/auth/RegisterView";
 import ConfirmAccountView from "./views/auth/ConfirmAccountView";
 import RequestNewCode from "./views/auth/RequestNewCode";
+import ForgotPasswordView from "./views/auth/ForgotPassword";
+import NewPassword from "./views/auth/NewPassword";
 
 
 export const Router = () => {
@@ -28,6 +30,8 @@ export const Router = () => {
                     <Route path="/auth/register" element={<RegisterView />} />
                     <Route path="/auth/confirmar" element={<ConfirmAccountView />} />
                     <Route path="/auth/requestCode" element={<RequestNewCode />} />
+                    <Route path="/auth/forgotPassword" element={<ForgotPasswordView />} />
+                    <Route path="/auth/newPassword" element={<NewPassword />} />
                 </Route>
             </Routes>
         </BrowserRouter >
