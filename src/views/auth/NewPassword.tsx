@@ -1,3 +1,5 @@
+import NewPasswordToken from '@/components/auth/NewPasswordToken';
+import NewPasswordForm from '@/components/auth/NewPasswordForm';
 import { useState } from 'react';
 
 export default function NewPassword() {
@@ -12,6 +14,7 @@ export default function NewPassword() {
                 <span className=" text-fuchsia-500 font-bold"> por email</span>
             </p>
 
+            {!isValidToken ? <NewPasswordToken /> : <NewPasswordForm />}
         </>
 
     )
