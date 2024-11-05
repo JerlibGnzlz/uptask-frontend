@@ -1,5 +1,9 @@
+import { useState } from 'react';
 
 export default function NewPassword() {
+
+    const [isValidToken, setIsValidToken] = useState(false)
+
     return (
         <>
             <h1 className="text-4xl font-black text-white">Restablecer Password</h1>
